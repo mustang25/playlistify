@@ -11,15 +11,14 @@ Amplify.configure(aws_exports);
 class App extends React.Component {
   render() {
     return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header headerText={'playlistify'}/>
-                <Home/>
                 <MusicList/>
             </View>
     );
   }
 }
 
-export default (App);
+export default withAuthenticator(App);
 
 

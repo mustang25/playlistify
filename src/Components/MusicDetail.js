@@ -1,25 +1,51 @@
 import React from 'react';
-import { Text, Image} from 'react-native';
+import { Text, Image, View, Linking} from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
+import Button from './Button';
 
 
 const MusicDetail = (props) => {
-    let image = props.music['images'][0].url;
-    console.log(image);
+
     return (
 
         <Card>
             <CardSection>
-                <Text>{props.music.name}</Text>
+                <View style={styles.headerContentStyle}>
+                    <Text style={styles.headerTextStyle}>{props.music.name}</Text>
+                    <Text>Number of Songs: {props.music.tracks.total}</Text>
+                </View>
             </CardSection>
-            <Image
-                style={{width: 365, height: 365, justifyContent: 'center'}}
-                source={{uri: props.music['images'][0].url}}
-            />
-        </Card>
 
+            <CardSection>
+                <Image
+                    source={{uri: props.music.images[0].url}}
+                    style={styles.imageStyle}
+                />
+            </CardSection>
+
+            <CardSection>
+                <Button onPress={() => Linking.openURL(props.music.external_urls.spotify)}>
+                    View Playlist
+                </Button>
+            </CardSection>
+        </Card>
     );
+};
+
+const styles = {
+    headerContentStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around'
+    },
+    headerTextStyle: {
+        fontSize: 18
+    },
+    imageStyle: {
+        height: 300,
+        flex: 1,
+        width: null
+    }
 };
 
 export default MusicDetail;
