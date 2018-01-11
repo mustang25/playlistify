@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
-import axios from 'axios';
-import Amplify, { API } from 'aws-amplify-react-native';
+import { ScrollView } from 'react-native';
+import { API } from 'aws-amplify-react-native';
 import MusicDetail from "./MusicDetail";
 
 class MusicList extends Component {
