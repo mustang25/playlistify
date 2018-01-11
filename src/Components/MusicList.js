@@ -6,18 +6,22 @@ import MusicDetail from "./MusicDetail";
 
 class MusicList extends Component {
     state = {
-        music: []
+        music: [],
+        newMusic: []
     };
 
     componentWillMount() {
-        axios.get('https://mj5481ufy5.execute-api.us-east-1.amazonaws.com/test/spotify/get-playlists')
-            .then(response => this.setState({ music: response.data.body }));
+        let path = '/spotify/get-playlists';
+
+        API.get('Spotify', path).then(response => {
+            this.setState({newMusic: response.body})
+        });
     }
 
     renderMusic() {
-        return this.state.music.map(music =>
-            <MusicDetail key={music.name} music={music} />
-        );
+        return this.state.newMusic.map(music =>
+            <MusicDetail key={music.name} music={music}/>
+        )
     }
 
     render() {

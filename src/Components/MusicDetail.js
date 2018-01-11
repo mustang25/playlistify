@@ -3,6 +3,7 @@ import { Text, Image, View, Linking} from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
+import { Analytics } from 'aws-amplify-react-native';
 
 
 const MusicDetail = (props) => {
@@ -24,8 +25,12 @@ const MusicDetail = (props) => {
                 />
             </CardSection>
 
+
             <CardSection>
-                <Button onPress={() => Linking.openURL(props.music.external_urls.spotify)}>
+                <Button onPress={() => {
+                    Analytics.record('OPENED-PLAYLIST');
+                    Linking.openURL(props.music.external_urls.spotify);
+                }}>
                     View Playlist
                 </Button>
             </CardSection>
